@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.sql.Timestamp;
@@ -17,6 +18,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder // 빌더 패턴!!
+// @DynamicInsert // insert시에 null인 필드를 제외시켜준다.
 public class User {
 
     @Id // Primary key
@@ -24,7 +26,7 @@ public class User {
     private int id; // 시퀀스, auto_increment
 
     @Column(nullable = false, length = 30)
-    private String usernmae; // 아이디
+    private String username; // 아이디
 
     @Column(nullable = false, length = 100) // 123456 => 해쉬(비밀번호 암호화)
     private String password;
@@ -32,8 +34,10 @@ public class User {
     @Column(nullable = false, length = 50)
     private String email; // myEmail (PhysicalNamingStrategyStandardImpl), my_email(CamelCaseToUnderscoresNamingStrategy) //
 
-    @ColumnDefault("'user'") // ''로 문자라는걸 알려줘야한다.
-    private String role; // Enum을 쓰는게 좋다.(도메인(영역, 범위)을 정할 수 있음) // admin, user, manager (String으로 하게 되면 실수로 managerrr로 들어갈 수도 있으므로)
+    // @ColumnDefault("'user'") // ''로 문자라는걸 알려줘야한다. default값 안 들어가게 주석 처리
+    // RoleType으로 type 강제,
+    @Enumerated(EnumType.STRING) // DB는 RoleType이라는게 없다. 알려줘야함
+    private RoleType role; // Enum을 쓰는게 좋다.(도메인(영역, 범위)을 정할 수 있음) // admin, user, manager (String으로 하게 되면 실수로 managerrr로 들어갈 수도 있으므로)
 
     @CreationTimestamp // 시간이 자동 입력
     private Timestamp createDate;
