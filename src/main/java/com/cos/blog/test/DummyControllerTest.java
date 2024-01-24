@@ -4,6 +4,7 @@ import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,6 +21,19 @@ public class DummyControllerTest {
 
     @Autowired // DummyControllerTest가 메모리에 뜰 때 UserRepository도 메모리에 같이 뜬다. (의존성주입=DI(Dependency Injection)
     private UserRepository userRepository;
+
+    @DeleteMapping("/dummy/user/{id}")
+    public String delete(@PathVariable int id) {
+
+        // 스프링부트 버전업 되면서 없는 id를 넣어도 예외가 발생하지 않음. 없을 시 그냥 무시함.
+        try {
+            userRepository.deleteById(id);
+        } catch(Exception e) {
+            return "삭제에 실패하였습니다. 해당 id는 DB에 없습니다.";
+        }
+
+        return "삭제되었습니다. id: " + id;
+    }
 
     // save함수는 id를 전달하지 않으면 insert를 해주고
     // save함수는 id를 전달하면 해당 id에 대한 데이터가 있으면 update를 해주고
@@ -43,7 +57,7 @@ public class DummyControllerTest {
 
         // userRepository.save(user);
 
-        // 더티 체킹?
+        // 더티 체킹? (찌꺼기 체킹?)
         /*
         여기에서 Dirty란 상태의 변화가 생긴 정도로 이해하시면 됩니다.
         즉, Dirty Checking이란 상태 변경 검사 입니다.
@@ -56,7 +70,7 @@ public class DummyControllerTest {
         즉, 값을 변경해도 데이터베이스에 반영되지 않는다는 것이죠.
         */
 
-       return null;
+       return user;
     }
 
 
@@ -96,7 +110,7 @@ public class DummyControllerTest {
         User user = userRepository.findById(id).orElseThrow(new Supplier<IllegalArgumentException>() {
             @Override
             public IllegalArgumentException get() {
-                return new IllegalArgumentException("해당 유저는 없습니다. id: " + id);
+                return new IllegalArgumentException("해당 사용자가 없습니다.");
             }
         });
         // 요청: 웹브라우저
