@@ -1,6 +1,5 @@
 package com.cos.blog.model;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 // ORM -> Java(다른언어 포함) Object -> 테이블로 매핑해주는 기술
