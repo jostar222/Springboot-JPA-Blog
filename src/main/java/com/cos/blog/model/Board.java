@@ -29,7 +29,6 @@ public class Board {
     @Column(columnDefinition = "TEXT")// 대용량 데이터, @Lob만 주면 tinytext로 나옴
     private String content; // 섬머노트 라이브러리 <html>태그가 섞여서 디자인이 됨.
 
-    @ColumnDefault("0")
     private int count; // 조회수
 
     // Many = Board, User = One -> 한 명의 유저는 여러 개의 게시글을 쓸 수 있다.
