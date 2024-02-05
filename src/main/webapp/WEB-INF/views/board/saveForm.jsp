@@ -10,7 +10,7 @@
         </div>
 
         <div class="form-group">
-            <label for="content">Comment:</label>
+            <label for="content">Content:</label>
             <textarea class="form-control summernote" rows="5" id="content"></textarea>
         </div>
     </form>
