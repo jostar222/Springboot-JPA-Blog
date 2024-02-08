@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
 
-@RestController
+@RestController //데이터를 반환해주는 컨트롤러, viewResolver가 작동하지 않음
 public class BoardApiController {
 
     @Autowired

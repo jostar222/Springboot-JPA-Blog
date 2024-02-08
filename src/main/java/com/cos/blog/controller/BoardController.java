@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@Controller
+@Controller //페이지(HTML)를 만들어서 반환해주는 컨트롤러, viewResolver가 작동
 public class BoardController {
 
     @Autowired
