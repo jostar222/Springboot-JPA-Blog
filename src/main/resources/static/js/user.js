@@ -3,8 +3,9 @@ let index = {
         $("#btn-save").on("click", ()=>{ //function(){}, ()=>{} this를 바인딩하기 위해서 화살표함수를 사용!!
             this.save();
         });
-        $("#btn-login").on("click", ()=>{ //function(){}, ()=>{} this를 바인딩하기 위해서 화살표함수를 사용!!
-            this.login();
+
+        $("#btn-update").on("click", ()=>{
+            this.update();
         });
     },
 
@@ -30,6 +31,32 @@ let index = {
         }).done(function(resp){
             //요청 성공
             alert("회원가입이 완료되었습니다.");
+            location.href="/";
+        }).fail(function(error){
+            //요청 실패
+            alert(JSON.stringify(error));
+        });
+
+    },
+
+    update:function () {
+        let data = {
+            id: $("#id").val(),
+            username: $("#username").val(),
+            password:$("#password").val(),
+            email:$("#email").val()
+        };
+
+
+        $.ajax({
+            type:"PUT",
+            url: "/user",
+            data:JSON.stringify(data),
+            contentType:"application/json;charset=utf-8",
+            dataType:"json"
+        }).done(function(resp){
+            //요청 성공
+            alert("회원수정이 완료되었습니다.");
             location.href="/";
         }).fail(function(error){
             //요청 실패
