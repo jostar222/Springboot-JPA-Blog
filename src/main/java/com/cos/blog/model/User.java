@@ -25,7 +25,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에서 연결된 DB의 넘버링 전략을 따라간다. 즉, 오라클이면 시퀀스, MySQL이면 auto_increment
     private int id; // 시퀀스, auto_increment
 
-    @Column(nullable = false, length = 30, unique = true) // 유니크키로 중복방지, 옵션 추가 후 테이블 재생성
+    @Column(nullable = false, length = 100, unique = true) // 유니크키로 중복방지, 옵션 추가 후 테이블 재생성
     private String username; // 아이디
 
     @Column(nullable = false, length = 100) // 123456 => 해쉬(비밀번호 암호화)
@@ -38,6 +38,8 @@ public class User {
     // RoleType으로 type 강제,
     @Enumerated(EnumType.STRING) // DB는 RoleType이라는게 없다. 알려줘야함
     private RoleType role; // Enum을 쓰는게 좋다.(도메인(영역, 범위)을 정할 수 있음) // admin, user, manager (String으로 하게 되면 실수로 managerrr로 들어갈 수도 있으므로)
+
+    private String oauth; //kakao, google, ...
 
     @CreationTimestamp // 시간이 자동 입력
     private Timestamp createDate;
