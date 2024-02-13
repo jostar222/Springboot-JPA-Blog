@@ -1,5 +1,6 @@
 package com.cos.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,7 +43,8 @@ public class Board {
     // board를 select할 때 join문을 통해서 값을 얻기위해 필요한 것이다.
     // OneToMany 기본 fetch 전략이 LAZY(지연 로딩)
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // 게시글 상세에서 댓글이 바로 보이므로 EAGER 사용
-    private List<Reply> reply;
+    @JsonIgnoreProperties({"board"}) //board를 json으로 parsing하지 않음(무한참조 방지) 그러나, board를 통해서가 아닌 직접 reply 불러올 땐 무시 안함.
+    private List<Reply> replys;
 
     @CreationTimestamp
     private Timestamp createDate;
