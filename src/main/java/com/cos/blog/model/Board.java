@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -44,6 +45,7 @@ public class Board {
     // OneToMany 기본 fetch 전략이 LAZY(지연 로딩)
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // 게시글 상세에서 댓글이 바로 보이므로 EAGER 사용
     @JsonIgnoreProperties({"board"}) //board를 json으로 parsing하지 않음(무한참조 방지) 그러나, board를 통해서가 아닌 직접 reply 불러올 땐 무시 안함.
+    @OrderBy("id desc")
     private List<Reply> replys;
 
     @CreationTimestamp
