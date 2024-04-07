@@ -19,6 +19,7 @@
 
         <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -46,6 +47,15 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/user/updateForm">회원정보</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/test/modalTest">모달</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/test/chartTest">차트</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/test/excelTest">엑셀</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/logout">로그아웃</a>
